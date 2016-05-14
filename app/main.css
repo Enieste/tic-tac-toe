@@ -1,0 +1,98 @@
+.game {
+    margin: 40px;
+}
+
+.game .table {
+    position: relative;
+    margin: auto;
+    width: 440px;
+    height: 440px;
+}
+
+.cell {
+    flex-basis: 140px;
+    width: 140px;
+    height: 140px;
+    margin: 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-family: sans-serif;
+}
+
+.cell:hover{
+    background-color: #c8dbf9;
+}
+
+.cell.up {
+    border-bottom: 2px solid #297480;
+}
+
+.cell.bottom {
+    border-top: 2px solid #297480;
+}
+
+.cell.right {
+    border-left: 2px solid #297480;
+}
+
+.cell.left {
+    border-right: 2px solid #297480;
+}
+
+.winner {
+    background-color: #24babd;
+}
+
+.game .interface {
+    position: absolute;
+    left: -160px;
+    border: 2px solid black;
+    width: 110px;
+    font: 20px sans-serif;
+    background-color: white;
+}
+
+.config {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.xo {
+    margin: 2px;
+    border: 1px solid black;
+    width: 55px;
+    height: 50px;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.xo:hover {
+    font-size: 50px;
+    background-color: palegreen;
+}
+
+.cells-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.game .buttons {
+    width: 50px;
+    margin: 1px;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.choosen-sign {
+    background-color: limegreen !important;
+}

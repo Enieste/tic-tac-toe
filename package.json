@@ -2,7 +2,7 @@
   "name": "react-webpack-babel",
   "version": "0.0.2",
   "description": "React Webpack Babel Starter Kit",
-  "main": "''",
+  "main": "server.js",
   "scripts": {
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
     "dev": "webpack-dev-server --progress --profile --colors --hot"

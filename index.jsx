@@ -5,4 +5,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './app/main.css';
 
-ReactDOM.render(<Game/>, document.querySelector("#myApp"));
+var div = document.createElement('div');
+document.body.appendChild(div);
+ReactDOM.render(<Game/>, div);

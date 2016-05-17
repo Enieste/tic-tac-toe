@@ -1,29 +1,14 @@
 {
-  "name": "react-webpack-babel",
-  "version": "0.0.2",
-  "description": "React Webpack Babel Starter Kit",
+  "name": "Tic Tac Toe",
+  "version": "",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
     "dev": "webpack-dev-server --progress --profile --colors --hot"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/alicoding/react-webpack-babel"
-  },
-  "keywords": [
-    "React",
-    "Webpack",
-    "Babel",
-    "Starter",
-    "template"
-  ],
-  "author": "Ali Al Dallal",
+  "author": "Kochkina Victoria",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/alicoding/react-webpack-babel/issues"
-  },
-  "homepage": "https://github.com/alicoding/react-webpack-babel#readme",
   "dependencies": {
     "babel-core": "6.7.7",
     "babel-loader": "6.2.4",

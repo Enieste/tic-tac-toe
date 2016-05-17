@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron:400,900');
+
 .game {
-    margin: 40px;
+    margin: 40px auto;
+    width: 60%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .game .table {
@@ -43,39 +50,7 @@
 }
 
 .winner {
-    background-color: #24babd;
-}
-
-.game .interface {
-    position: absolute;
-    left: -160px;
-    border: 2px solid black;
-    width: 110px;
-    font: 20px sans-serif;
-    background-color: white;
-}
-
-.config {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-}
-
-.xo {
-    margin: 2px;
-    border: 1px solid black;
-    width: 55px;
-    height: 50px;
-    font-size: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-
-.xo:hover {
-    font-size: 50px;
-    background-color: palegreen;
+    background-color: #c8dbf9;
 }
 
 .cells-wrapper {
@@ -93,6 +68,24 @@
     justify-content: center;
 }
 
-.choosen-sign {
-    background-color: limegreen !important;
+.game .icons:hover {
+    cursor: pointer;
+}
+
+.game .computer {
+    color: slategrey;
+}
+
+.game .human {
+    color: hotpink;
+}
+
+.game .robovoice {
+    font-family: 'Orbitron', sans-serif;
+}
+
+.robot {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
 }

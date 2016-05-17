@@ -141,29 +141,25 @@ const Game = React.createClass({
 		const winnerRow = this.winnerRow(field);
 		const end = this.isEnd(field);
 		return <div className='game'>
+			<i className='fa fa-user fa-5x icons human' onClick={() => this.handleSideClick(true)} />
 			<div className='table'>
-				<div className='interface'>
-					<i className='fa fa-android fa-4x' onClick={() => this.handleSideClick(false)} />
-					<i className='fa fa-user fa-4x' onClick={() => this.handleSideClick(true)} />
-				<span>Choose</span>
-				<div className='config'>
-					<div className={classNames({'xo': true, 'choosen-sign': playerSide})}
-				onClick={() => this.handleSideClick(true)}>X</div>
-					<div className={classNames({'xo': true, 'choosen-sign': !playerSide})}
-					onClick={() => this.handleSideClick(false)}>O</div>
+				<div className='cells-wrapper'>
+					{field.map((cell, i) =>
+						<div key={i}
+								 className={classNames('cell', cellBordersClass(i), {
+									 'winner': winner !== undefined && winnerRow.indexOf(i) !== -1,
+									 'human': (playerSide && cell) || (!playerSide && !cell),
+									 'computer': (playerSide && !cell) || (!playerSide && cell)
+								 })}
+								 onClick={winner !== undefined || end ? () => _ : this.handleClick(i)}>
+							{definition[cell]}
+						</div>
+					)}
 				</div>
 			</div>
-		<div className='cells-wrapper'>
-			{field.map((cell, i) =>
-				<div key={i}
-						 className={classNames('cell', cellBordersClass(i), {
-						   'winner': winner !== undefined && winnerRow.indexOf(i) !== -1
-						 })}
-						 onClick={winner !== undefined || end ? () => _ : this.handleClick(i)}>
-					{definition[cell]}
-				</div>
-			)}
-		</div>
+			<div className='robot'>
+				<p className='robovoice'>I'll destroy you</p>
+				<i className='fa fa-android fa-5x icons computer' onClick={() => this.handleSideClick(false)} />
 			</div>
 		</div>
 	}

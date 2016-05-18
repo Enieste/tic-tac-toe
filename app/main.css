@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Orbitron:400,900');
 
 .game {
-    margin: 40px auto;
+    margin: 5% auto;
     width: 60%;
     display: flex;
     flex-flow: row wrap;
@@ -10,27 +10,19 @@
 }
 
 .game .table {
-    position: relative;
     margin: auto;
-    width: 440px;
-    height: 440px;
+    width: 60%;
 }
 
 .cell {
-    flex-basis: 140px;
     width: 140px;
     height: 140px;
-    margin: 2px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: 60px;
     font-family: sans-serif;
-}
-
-.cell:hover{
-    background-color: #c8dbf9;
 }
 
 .cell.up {
@@ -61,13 +53,6 @@
     align-content: center;
 }
 
-.game .buttons {
-    width: 50px;
-    margin: 1px;
-    display: inline-flex;
-    justify-content: center;
-}
-
 .game .icons:hover {
     cursor: pointer;
 }
@@ -82,10 +67,31 @@
 
 .game .robovoice {
     font-family: 'Orbitron', sans-serif;
+    width: 120px;
 }
 
 .robot {
     display: flex;
     flex-flow: column wrap;
     align-items: center;
+}
+
+.x-cell::after {
+    content: 'X';
+}
+
+.o-cell::after {
+    content: 'O';
+}
+
+.x-cursor:hover::after {
+    content: 'X';
+    color: #ffc9bf;
+    font-size: 40px;
+}
+
+.o-cursor:hover::after {
+    content: 'O';
+    color: #ffc9bf;
+    font-size: 40px;
 }

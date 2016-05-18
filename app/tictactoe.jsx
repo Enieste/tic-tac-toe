@@ -3,13 +3,6 @@
 import React from 'react';
 const _ = require('lodash');
 const classNames = require('classnames');
-//import {Icon} from 'react-fa';
-
-const definition = {
-	'undefined': undefined,
-	'true': 'X',
-	'false': 'O'
-};
 
 const cellBordersClass = (cell) => {
 	let classNames = [];
@@ -34,6 +27,19 @@ const Game = React.createClass({
 			history: []
 		}
 	},
+	resetGame(side, cb) {
+		window.clearTimeout(this.gameEndTimeout);
+		window.clearTimeout(this.computerThinkProcessTimeout);
+		this.setState({
+			field: [
+				undefined, undefined, undefined,
+				undefined, undefined, undefined,
+				undefined, undefined, undefined
+			],
+			playerSide: side,
+			history: []
+		}, () => cb())
+	},
 	winnerRow(field) {
 		for(let i = 0; i <= 6; i += 3) {
 			if(field[i] !== undefined && field[i] === field[i + 1] && field[i + 1] === field[i + 2]) {
@@ -54,10 +60,13 @@ const Game = React.createClass({
 	hasWinner(field) {
 		return !!this.winnerRow(field);
 	},
-	isEnd(field) {
+	isDraw(field) {
 		return field.filter((cell) => {
 				return cell === undefined;
 	}).length === 0;
+	},
+	isEnd() {
+		return this.hasWinner(this.state.field) || this.isDraw(this.state.field);
 	},
 	aiTurn() {
 		const { field, playerSide, history } = this.state;
@@ -75,7 +84,7 @@ const Game = React.createClass({
 			if (this.hasWinner(game.board)) {
 				return score(game.side, depth);
 			}
-			if (this.isEnd(game.board)) {
+			if (this.isDraw(game.board)) {
 				return score (undefined, depth);
 			}
 			let scores = [];
@@ -94,10 +103,10 @@ const Game = React.createClass({
 		};
 		minimax({board: field, side: !playerSide}, 0);
 		if (choice !== undefined) {
-			setTimeout(() => this.setState({
+			this.computerThinkProcessTimeout = setTimeout(() => this.setState({ // emulate computer thinking
 				field: [...field.slice(0, choice), !playerSide, ...field.slice(choice + 1, field.length)],
 			history: history.concat([choice])
-		}), 1000)
+		}, () => this.isEnd() ? this.gameEndTimeout = setTimeout(() => this.resetGame(()=>_), 4000) : () => _), 1000)
 		}
 	},
 	handleClick(cell) {
@@ -109,7 +118,7 @@ const Game = React.createClass({
 				this.setState({
 					field: [...field.slice(0, cell), playerSide, ...field.slice(cell + 1, field.length)],
 				history: history.concat([cell])
-			}, () => this.aiTurn())
+			}, () => this.isEnd() ? this.gameEndTimeout = setTimeout(this.resetGame, 4000) : this.aiTurn())
 			}
 		}
 	},
@@ -124,22 +133,15 @@ const Game = React.createClass({
 		}
 	},
 	handleSideClick(side) {
-		this.setState({playerSide: side,
-			field: [
-				undefined, undefined, undefined,
-				undefined, undefined, undefined,
-				undefined, undefined, undefined
-			],
-			history: []
-		}, () => {
-			if (side === false) this.handleStart();
+		this.resetGame(side, () => {
+			if (this.state.playerSide === false) this.handleStart();
 		})
 	},
 	render() {
 		const { field, history, playerSide } = this.state;
 		const winner = this.hasWinner(field) ? field[_.last(history)] : undefined;
 		const winnerRow = this.winnerRow(field);
-		const end = this.isEnd(field);
+		const draw = this.isDraw(field);
 		return <div className='game'>
 			<i className='fa fa-user fa-5x icons human' onClick={() => this.handleSideClick(true)} />
 			<div className='table'>
@@ -149,16 +151,19 @@ const Game = React.createClass({
 								 className={classNames('cell', cellBordersClass(i), {
 									 'winner': winner !== undefined && winnerRow.indexOf(i) !== -1,
 									 'human': (playerSide && cell) || (!playerSide && !cell),
-									 'computer': (playerSide && !cell) || (!playerSide && cell)
+									 'computer': (playerSide && !cell) || (!playerSide && cell),
+									 'x-cell': cell,
+									 'o-cell': cell === false,
+									 'x-cursor': playerSide && !field[_.last(history)] && cell === undefined,
+									 'o-cursor': !playerSide && field[_.last(history)] && cell === undefined
 								 })}
-								 onClick={winner !== undefined || end ? () => _ : this.handleClick(i)}>
-							{definition[cell]}
+								 onClick={winner !== undefined || draw ? () => _ : this.handleClick(i)}>
 						</div>
 					)}
 				</div>
 			</div>
 			<div className='robot'>
-				<p className='robovoice'>I'll destroy you</p>
+				<p className='robovoice'>{history.length === 0 ? 'Who starts?' : "I'll destroy you!"}</p>
 				<i className='fa fa-android fa-5x icons computer' onClick={() => this.handleSideClick(false)} />
 			</div>
 		</div>

@@ -11,17 +11,18 @@
 
 .game .table {
     margin: auto;
-    width: 60%;
+    width: 70vh;
+    height: 70vh;
 }
 
 .cell {
-    width: 140px;
-    height: 140px;
+    width: 33%;
+    height: 33%;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 60px;
+    font-size: 10vh;
     font-family: sans-serif;
 }
 
@@ -46,6 +47,7 @@
 }
 
 .cells-wrapper {
+    height: 100%;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -67,7 +69,7 @@
 
 .game .robovoice {
     font-family: 'Orbitron', sans-serif;
-    width: 120px;
+    width: 18vh;
 }
 
 .robot {
@@ -87,11 +89,11 @@
 .x-cursor:hover::after {
     content: 'X';
     color: #ffc9bf;
-    font-size: 40px;
+    font-size: 8vh;
 }
 
 .o-cursor:hover::after {
     content: 'O';
     color: #ffc9bf;
-    font-size: 40px;
+    font-size: 8vh;
 }
